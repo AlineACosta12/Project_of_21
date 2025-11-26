@@ -6,7 +6,6 @@ class Game21:
         self.new_round()
 
     # ROUND MANAGEMENT
-
     def new_round(self):
         """
         Prepares for a new round
