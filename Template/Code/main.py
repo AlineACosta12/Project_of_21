@@ -16,6 +16,7 @@ class MainWindow(QMainWindow):
 
         self.game = Game21()
 
+
         self.initUI()
 
     def initUI(self):
