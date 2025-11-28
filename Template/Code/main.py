@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Game of 21")
         self.setWindowIcon(
-            QIcon("./icons/game.png"))
+            QIcon("./icons/game.png")) # documentation: <a href="https://www.flaticon.com/free-icons/blackjack" title="blackjack icons">Blackjack icons created by Paul J. - Flaticon</a>
 
         # set the windows dimensions
         self.setGeometry(200, 200, 400, 400)
