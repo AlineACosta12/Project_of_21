@@ -1,3 +1,4 @@
+from PyQt6.QtGui import QIcon
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel
 from PyQt6.QtCore import Qt
 import sys
@@ -10,6 +11,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Game of 21")
+        self.setWindowIcon(
+            QIcon("./icons/game.png"))
 
         # set the windows dimensions
         self.setGeometry(200, 200, 400, 400)
