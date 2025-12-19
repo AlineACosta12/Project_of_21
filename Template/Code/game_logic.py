@@ -3,6 +3,9 @@ import random
 class Game21:
     def __init__(self):
         # Start immediately with a fresh round
+        self.player_wins = 0  # simple stats tracker
+        self.dealer_wins = 0
+        self.pushes = 0
         self.new_round()
 
     # ROUND MANAGEMENT AND SETUP
@@ -90,31 +93,49 @@ class Game21:
         1. Count all Aces as 11 initially.
         2. If total > 21, subtract 10 for each Ace, so it effectively makes them = 1
         """
+        total = 0
+        aces = 0
+
+        for card in hand:
+            value = self.card_value(card)
+            total += value
+            rank = card[:-1]
+            if rank == "A":
+                aces += 1
+
+        # Adjust Aces from 11 to 1 as needed to avoid busting
+        while total > 21 and aces > 0:
+            total -= 10  # turn one Ace from 11 to 1
+            aces -= 1
+
+        return total
 
     # PLAYER ACTIONS
 
     def player_hit(self):
         # TODO: Add one card to the player's hand and return it, so the UI can display the card. Remove pass when complete.
-        pass
+        card = self.draw_card()
+        self.player_hand.append(card)
+        return card
 
     def player_total(self):
         # TODO: Return the player's total. Remove pass when complete.
-        pass
+        return self.hand_total(self.player_hand)
 
     # DEALER ACTIONS
-
     def reveal_dealer_card(self):
         # TODO: Called when the player presses Stand. After this, the UI should show both dealer cards. Remove pass when complete.
-        pass
-
+        self.dealer_hidden_revealed = True
 
     def dealer_total(self):
         # TODO: Return the dealer's total. Remove pass when complete.
-        pass
+        return self.hand_total(self.dealer_hand)
 
     def play_dealer_turn(self):
         # TODO: Dealer must hit until their total is 17 or more, then stand.  Remove pass when complete.
-        pass
+        # Dealer draws until total >= 17
+        while self.dealer_total() < 17:
+            self.dealer_hand.append(self.draw_card())
 
     # WINNER DETERMINATION
 
@@ -128,4 +149,26 @@ class Game21:
         - "Dealer wins!"
         - "Push (tie)."
         """
+        player_total = self.player_total()
+        dealer_total = self.dealer_total()
 
+        # Player busts
+        if player_total > 21:
+            self.dealer_wins += 1
+            return "Player busts. Dealer wins!"
+
+        # Dealer busts
+        if dealer_total > 21:
+            self.player_wins += 1
+            return "Dealer busts. Player wins!"
+
+        # Neither busts – compare totals
+        if player_total > dealer_total:
+            self.player_wins += 1
+            return "Player wins!"
+        elif dealer_total > player_total:
+            self.dealer_wins += 1
+            return "Dealer wins!"
+        else:
+            self.pushes += 1
+            return "Push (tie)."
