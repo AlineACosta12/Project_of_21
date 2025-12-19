@@ -537,7 +537,6 @@ class MainWindow(QMainWindow):
             border: 2px solid {border};
         """)
 
-
 # complete
 
 if __name__ == '__main__':

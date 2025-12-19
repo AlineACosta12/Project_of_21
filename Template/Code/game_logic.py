@@ -123,7 +123,6 @@ class Game21:
         return self.hand_total(self.player_hand)
 
     # DEALER ACTIONS
-
     def reveal_dealer_card(self):
         # TODO: Called when the player presses Stand. After this, the UI should show both dealer cards. Remove pass when complete.
         self.dealer_hidden_revealed = True
