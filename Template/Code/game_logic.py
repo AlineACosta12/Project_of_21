@@ -107,7 +107,6 @@ class Game21:
         while total > 21 and aces > 0:
             total -= 10  # turn one Ace from 11 to 1
             aces -= 1
-
         return total
 
     # PLAYER ACTIONS
