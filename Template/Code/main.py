@@ -6,7 +6,6 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtCore import Qt
 import sys
-
 # this project should use a modular approach - try to keep UI logic and game logic separate
 from game_logic import Game21
 
